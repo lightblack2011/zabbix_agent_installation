@@ -1,0 +1,1 @@
+zabbix_agents-4.0.10-win-amd64-openssl
