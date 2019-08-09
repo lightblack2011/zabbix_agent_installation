@@ -24,8 +24,8 @@ If (Get-Service $serviceName -ErrorAction SilentlyContinue) {
     Copy-Item 'C:\zabbix_agent_installation\zabbix-agentd' 'C:\Program Files\' -Recurse
     Start-Process -FilePath "C:\Program Files\zabbix-agentd\bin\zabbix_agentd.exe" -ArgumentList '-c "C:\Program Files\zabbix-agentd\conf\zabbix_agentd.conf" -i' -NoNewWindow
     cmd /c "C:\zabbix_agent_installation\OpenSSL\bin\openssl.exe rand -hex 32 > C:\zabbix_agent_installation\OpenSSL\zabbix_agentd.psk"
-    (gc "$path_folder\conf\zabbix_agentd.conf") -creplace "^Server=127.0.0.1$", "Server=10.1.10.7" | Set-Content "$path_folder\conf\zabbix_agentd.conf"
-    (gc "$path_folder\conf\zabbix_agentd.conf") -creplace "^ServerActive=127.0.0.1$", "ServerActive=10.1.10.7" | Set-Content "$path_folder\conf\zabbix_agentd.conf"
+    (gc "$path_folder\conf\zabbix_agentd.conf") -creplace "^Server=127.0.0.1$", "Server=ZABBIX_SERVER_ADDRESS" | Set-Content "$path_folder\conf\zabbix_agentd.conf"
+    (gc "$path_folder\conf\zabbix_agentd.conf") -creplace "^ServerActive=127.0.0.1$", "ServerActive=ZABBIX_SERVER_ADDRESS" | Set-Content "$path_folder\conf\zabbix_agentd.conf"
     (gc "$path_folder\conf\zabbix_agentd.conf") -creplace "^Hostname=Windows host$", "Hostname=$server_name" | Set-Content "$path_folder\conf\zabbix_agentd.conf"
     (gc "$path_folder\conf\zabbix_agentd.conf") -creplace "^# TLSConnect=unencrypted$", "TLSConnect=psk" | Set-Content "$path_folder\conf\zabbix_agentd.conf"
     (gc "$path_folder\conf\zabbix_agentd.conf") -creplace "^# TLSAccept=unencrypted$", "TLSAccept=psk" | Set-Content "$path_folder\conf\zabbix_agentd.conf"
